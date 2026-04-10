@@ -1,0 +1,60 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="404 — Page Not Found" description="This page doesn't exist.">
+  <section class="not-found">
+    <div class="container">
+      <div class="error-code">404</div>
+      <h1>Page not found</h1>
+      <p>The page you're looking for doesn't exist or has been moved.</p>
+      <a href="/" class="home-link">← Back to Home</a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .not-found {
+    padding: 120px 0;
+    text-align: center;
+  }
+
+  .error-code {
+    font-family: var(--font-mono);
+    font-size: 120px;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: -20px;
+  }
+
+  .not-found h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .not-found p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    transition: all 0.25s;
+  }
+
+  .home-link:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<PageLayout title="Blog — Brenden Cheung" description="Writing about infrastructure, developer tools, debugging, and systems design.">
+  <section class="blog-page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Blog</h1>
+        <p class="page-description">Writing about infrastructure, developer tools, debugging, and the messy reality of building software.</p>
+      </header>
+
+      <div class="posts-grid">
+        {allPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.pubDate}
+            excerpt={post.data.description}
+            tags={post.data.tags}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .blog-page {
+    padding: 60px 0 80px;
+  }
+
+  .page-header {
+    margin-bottom: 48px;
+  }
+
+  .page-header h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .page-description {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .posts-grid {
+    display: grid;
+    gap: 20px;
+  }
+</style>

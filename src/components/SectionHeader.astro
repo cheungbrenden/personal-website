@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  linkText?: string;
+  linkHref?: string;
+}
+
+const { title, linkText, linkHref } = Astro.props;
+---
+
+<div class="section-header">
+  <h2 class="section-title">{title}</h2>
+  {linkText && linkHref && (
+    <a href={linkHref} class="section-link">{linkText}</a>
+  )}
+</div>
+
+<style>
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .section-link {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .section-link:hover {
+    opacity: 0.7;
+  }
+</style>

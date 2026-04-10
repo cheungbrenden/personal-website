@@ -1,0 +1,59 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-text">© {year} Brenden Cheung. Built with Astro.</div>
+      <div class="footer-socials">
+        <a href="https://github.com/brendencheung" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/brendencheung" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://x.com/brendencheung" target="_blank" rel="noopener noreferrer">X</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-socials a {
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .footer-socials a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+</style>

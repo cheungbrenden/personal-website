@@ -1,0 +1,100 @@
+---
+import PageLayout from './PageLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+const { title, description, pubDate, tags } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Estimate reading time from word count
+const slotContent = await Astro.slots.render('default');
+const wordCount = slotContent.replace(/<[^>]*>/g, '').split(/\s+/).length;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+---
+
+<PageLayout title={`${title} — Brenden Cheung`} description={description}>
+  <article class="post-page">
+    <div class="container">
+      <a href="/blog" class="back-link">← Back to Blog</a>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          <span class="separator">·</span>
+          <span>{readingTime} min read</span>
+        </div>
+        <h1>{title}</h1>
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        )}
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .post-page {
+    padding: 60px 0 80px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-header h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 16px;
+    max-width: 720px;
+  }
+
+  .post-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .separator {
+    opacity: 0.4;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+</style>

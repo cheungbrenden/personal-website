@@ -1,0 +1,65 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout title="Projects — Brenden Cheung" description="A collection of projects I've built — from cloud platforms to CLI tools.">
+  <section class="projects-page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Projects</h1>
+        <p class="page-description">Things I've built. From cloud development platforms to small CLI utilities that scratch an itch.</p>
+      </header>
+
+      <div class="projects-grid">
+        {allProjects.map(project => (
+          <ProjectCard
+            name={project.data.name}
+            description={project.data.description}
+            tech={project.data.tech}
+            github={project.data.github}
+            demo={project.data.demo}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .projects-page {
+    padding: 60px 0 80px;
+  }
+
+  .page-header {
+    margin-bottom: 48px;
+  }
+
+  .page-header h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .page-description {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

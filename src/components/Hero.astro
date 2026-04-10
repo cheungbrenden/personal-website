@@ -1,0 +1,182 @@
+---
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-label">Software Engineer</div>
+        <h1>Hi, I'm <span class="accent">Brenden</span>.<br />I build things for the&nbsp;web.</h1>
+        <p class="hero-description">
+          Software engineer passionate about infrastructure, developer tools, and building systems that scale. Currently writing about what I'm learning and sharing the projects I'm working on.
+        </p>
+        <div class="hero-links">
+          <a href="/blog" class="primary">Read the Blog →</a>
+          <a href="/projects" class="secondary">View Projects</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-inner">
+          <span>photo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 100px 0 80px;
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .hero-text h1 {
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .hero-description {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s;
+  }
+
+  .hero-links .primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .hero-links .primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .hero-links .secondary {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .hero-links .secondary:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  /* Large photo placeholder on the right */
+  .hero-photo {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo-inner span {
+    opacity: 0.5;
+  }
+
+  /* Subtle glow behind photo */
+  .hero-photo-inner::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,165,90,0.06) 0%, transparent 70%);
+    z-index: -1;
+  }
+
+  /* Fade in animation */
+  .hero-text > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeIn 0.7s ease forwards;
+  }
+  .hero-text > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-text > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-text > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-text > *:nth-child(4) { animation-delay: 0.4s; }
+
+  .hero-photo {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeIn 0.7s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes heroFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column-reverse;
+      gap: 32px;
+      text-align: center;
+    }
+
+    .hero-photo {
+      width: 160px;
+      height: 160px;
+    }
+
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-links {
+      justify-content: center;
+    }
+  }
+</style>

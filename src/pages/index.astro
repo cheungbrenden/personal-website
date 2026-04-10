@@ -1,0 +1,77 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const allProjects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout title="Brenden Cheung — Software Engineer" description="Software engineer passionate about infrastructure, developer tools, and building systems that scale.">
+  <Hero />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title="Latest Writing" linkText="All posts →" linkHref="/blog" />
+      <div class="posts-grid">
+        {allPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.pubDate}
+            excerpt={post.data.description}
+            tags={post.data.tags}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title="Featured Projects" linkText="All projects →" linkHref="/projects" />
+      <div class="projects-grid">
+        {allProjects.map(project => (
+          <ProjectCard
+            name={project.data.name}
+            description={project.data.description}
+            tech={project.data.tech}
+            github={project.data.github}
+            demo={project.data.demo}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .section {
+    padding: 60px 0;
+  }
+
+  .posts-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
