@@ -3,5 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://brendencheung.com',
+  site: 'https://personal-website-8x5.pages.dev',
 });
